@@ -1,6 +1,16 @@
+'''
+Part class, used in PrintOrch by UserGUI.pyw
+Author: Andreas Klavenes Berg
+Created: 10.01.2019
+'''
 import tkinter as tk
 
-
+'''
+class Part
+---------------------------------------------------------
+Tkinter object, combining a textbox with a spinbox to
+list files and apply number of copies to be made
+'''
 class Part(tk.Frame):
     def __init__(self, master, path, fname, **kwargs):
         self.h = 1
