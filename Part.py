@@ -22,6 +22,8 @@ class Part(tk.Frame):
         self.frame = tk.Frame(master, **kwargs)
         self.partname = tk.Label(self.frame, width=40, textvariable=self.name)
         self.partname.pack(side=tk.LEFT)
+        #self.spinner = tk.Spinbox(master, width=3, from_=0, to=100)
+        #self.spinner.pack(side=tk.RIGHT)
         self.btnDOWN = tk.Button(self.frame, text="-", height=self.h, width=1, command=self.actionDown)
         self.btnDOWN.pack(side=tk.RIGHT)
         self.numIn = tk.Entry(self.frame, width=3, textvariable=self.num, state=tk.DISABLED) # ???
@@ -39,6 +41,7 @@ class Part(tk.Frame):
             self.btnDOWN.config(state=tk.DISABLED)
 
     def get(self):
+        #return self.spinner.getint()
         return self.num.get()
 
     def pack(self, **kwargs):

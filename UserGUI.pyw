@@ -9,7 +9,10 @@ from easygui    import diropenbox, msgbox
 from PyPDF2     import PdfFileMerger, PdfFileReader
 from os         import listdir
 from Part       import Part
+from Scrollable import Scrollable
+from tkinter    import ttk
 import tkinter as tk
+
 
 # TODO: List parts, find names, change num copies with up/down btns, set work as title
 
@@ -76,18 +79,39 @@ class PrintOrch:
         # ---------------------------------------------------------
         
         # ---------------------------------------------------------
-        # LIST PARTS
+        # LIST PARTS 
+        # ---------------------------------------------------------
+        # frame - canvas+scrollbar - frame
+        # TODO: Create boundaries for scrollbar to prevent it from throwing
+        # the content away. Make the scrollbar look enabled and enable 
+        # scroll with mouse holds
         # ---------------------------------------------------------
         self.parts = []
-        self.partFrame = tk.Frame(self.root, height=40, width=60)
+        self.partFrame = tk.Frame(self.root, height=220, width=360)
         self.partFrame.pack()
+        self.partFrame.pack_propagate(0)
         # ---------------------------------------------------------
-        self.scroll = tk.Scrollbar(self.partFrame)
-        self.scroll.pack(side=tk.RIGHT, fill=tk.Y)
-        self.listbox = tk.Listbox(self.partFrame, yscrollcommand=self.scroll.set)
-        self.listbox.pack(side=tk.LEFT, fill=tk.BOTH)
+        self.scrollable = tk.Canvas(self.partFrame, borderwidth=0, bg="#ffffff")
         # ---------------------------------------------------------
-
+        self.listbox = tk.Frame(self.scrollable, bg="#ffffff")
+        # ---------------------------------------------------------
+        self.scroll = ttk.Scrollbar(self.partFrame, command=self.scrollable.yview)
+        self.scroll.pack(side=tk.RIGHT, fill="y")
+        # ---------------------------------------------------------
+        self.scrollable.configure(yscrollcommand=self.scroll.set)
+        self.scrollable.pack(side=tk.LEFT, fill="both", expand=True)
+        self.scrollable.create_window((4,4), window=self.listbox, anchor="nw")
+        # ---------------------------------------------------------
+        @staticmethod
+        def onFrameConfigure(canvas):
+            '''Reset the scroll region to encompass the inner frame'''
+            canvas.configure(scrollregion=canvas.bbox("all"))
+        # ---------------------------------------------------------
+        self.listbox.bind("<Configure>", lambda event, canvas=self.scrollable: onFrameConfigure(self.scrollable))
+        self.scrollable.bind_all('<MouseWheel>', lambda event: self.scrollable.yview_scroll(int(-1*(event.delta/120)), "units"))
+        #self.listbox = tk.Listbox(self.partFrame, yscrollcommand=self.scroll.set)
+        #self.listbox.pack(side=tk.LEFT, fill=tk.Y)
+        # ---------------------------------------------------------
 
         # ---------------------------------------------------------
         # ACTIONS FRAME
@@ -122,10 +146,11 @@ class PrintOrch:
         if p != "":
             self.path.set(p)
             # List files in the chosen directory
-            self.listbox.delete(0, tk.END)
+            #self.listbox.delete(0, tk.END)
             for f in listdir(p):
                 if ".pdf" in f:
-                    self.listbox.insert(tk.END, Part(self.listbox, p, f).pack())
+                    self.parts.append(f)
+                    Part(self.listbox, p, f).pack()
 
     def prompt_save_dir(self):
         '''
@@ -138,6 +163,8 @@ class PrintOrch:
     def proceed(self):
         msgbox(self.pathIn.get() + "\n" + self.save_pathIn.get())
         pass
+    
+    
 
 
 # ---------------------------------------------------------
