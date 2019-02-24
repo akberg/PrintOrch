@@ -2,21 +2,23 @@
 PrintOrch with graphical user interface
 Author: Andreas Klavenes Berg
 Created: 08.01.2019
+Updated: 24.02.2019
 '''
 
-# Imports
-from easygui    import diropenbox, msgbox
+from easygui    import diropenbox, msgbox, ccbox
 from PyPDF2     import PdfFileMerger, PdfFileReader
 from os         import listdir
 from Part       import Part
-from Scrollable import Scrollable
 from tkinter    import ttk
 import tkinter as tk
 
-
 # TODO: List parts, find names, change num copies with up/down btns, set work as title
 
-
+# -----------------------------------------------------------------
+# class PrintOrch 
+# -----------------------------------------------------------------
+# Main class. Creates and displays main app
+# -----------------------------------------------------------------
 class PrintOrch:
     def __init__(self):
         # ---------------------------------------------------------
@@ -126,7 +128,7 @@ class PrintOrch:
         self.quitBtn = tk.Button(self.actionFrame, text="Quit", command=exit)
         self.quitBtn.pack(side="left")
         # ---------------------------------------------------------
-        self.goBtn = tk.Button(self.actionFrame, text="Proceed", command=self.proceed)
+        self.goBtn = tk.Button(self.actionFrame, text="Proceed", state=tk.DISABLED, command=self.proceed)
         self.goBtn.pack(side="right")
 
     # ---------------------------------------------------------
@@ -145,12 +147,16 @@ class PrintOrch:
         p = diropenbox("Velg mappen som inneholder stykket som skal skrives ut.", "Hent notemappe")
         if p != "":
             self.path.set(p)
+            self.save_name.set(p.split("\\")[-1] + "_printready")
+            if self.save_path != "":
+                self.goBtn.configure(state=tk.NORMAL)
             # List files in the chosen directory
             #self.listbox.delete(0, tk.END)
             for f in listdir(p):
                 if ".pdf" in f:
-                    self.parts.append(f)
-                    Part(self.listbox, p, f).pack()
+                    p = Part(self.listbox, p, f)
+                    p.pack()
+                    self.parts.append(p)
 
     def prompt_save_dir(self):
         '''
@@ -159,9 +165,17 @@ class PrintOrch:
         p = diropenbox("Velg mappen hvor du vil lagre utskriftfilen.", "Velg målmappe")
         if p != "":
             self.save_path.set(p)
+            if self.path != "":
+                self.goBtn.configure(state=tk.NORMAL)
 
     def proceed(self):
-        msgbox(self.pathIn.get() + "\n" + self.save_pathIn.get())
+        if not ccbox("Fullføre " + self.save_pathIn.get() + self.save_name.get() + "?", choices=("Fullfør", "Avbryt"), default_choice="Fullfør", cancel_choice="Avbryt"):
+            pass
+        for part in self.parts:
+            n = part.get()
+            for i in range(n):
+                self.out_file.append(self.path.get() + part.getFile())
+        self.out_file.write(self.save_path.get() + "\\" + self.save_name.get())
         pass
     
     
