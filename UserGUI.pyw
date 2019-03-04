@@ -32,9 +32,11 @@ class PrintOrch:
         # ---------------------------------------------------------
         self.path = tk.StringVar() # Oppdaterer automatisk forelder
         self.path.set("Choose path")
+        self.pathVar = ""
         # ---------------------------------------------------------
         self.save_path = tk.StringVar()
         self.save_path.set("Choose save path")
+        self.save_pathVar = ""
         # ---------------------------------------------------------
         self.work = tk.StringVar()
         self.work.set("No work chosen")
@@ -146,6 +148,7 @@ class PrintOrch:
         '''
         p = diropenbox("Velg mappen som inneholder stykket som skal skrives ut.", "Hent notemappe")
         if p != "":
+            self.pathVar = p
             self.path.set(p)
             self.save_name.set(p.split("\\")[-1] + "_printready")
             if self.save_path != "":
@@ -171,10 +174,11 @@ class PrintOrch:
     def proceed(self):
         if not ccbox("Fullføre " + self.save_pathIn.get() + self.save_name.get() + "?", choices=("Fullfør", "Avbryt"), default_choice="Fullfør", cancel_choice="Avbryt"):
             pass
+        p = self.path.get()
         for part in self.parts:
             n = part.get()
             for i in range(n):
-                self.out_file.append(self.path.get() + part.getFile())
+                self.out_file.append(p + part.getFile())
         self.out_file.write(self.save_path.get() + "\\" + self.save_name.get())
         pass
     
