@@ -8,7 +8,7 @@ Updated: 24.02.2019
 from easygui    import diropenbox, msgbox, ccbox
 from PyPDF2     import PdfFileMerger, PdfFileReader
 from os         import listdir
-from gui.Part       import Part
+from gui.Part   import Part
 from tkinter    import ttk
 import tkinter as tk
 
