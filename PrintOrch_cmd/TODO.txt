@@ -1,0 +1,5 @@
+TODO:
+*******************************************************************************
+- Fikse at instrumentnavn ikke kuttes
+- Kjenne igjen instrumentnavn
+- Fikse avstand til antall
