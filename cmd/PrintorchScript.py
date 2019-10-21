@@ -9,6 +9,15 @@ from easygui import diropenbox
 from PyPDF2 import PdfFileReader, PdfFileMerger
 
 
+class Part():
+    """
+    Metainfo on a single part
+    """
+
+    def __init__(self, filename):
+        pass
+
+
 class ScoreMerger:
 
 
@@ -31,15 +40,15 @@ class ScoreMerger:
 
 
     instruments = [
-        ["violin 1", ["vln", "1.fiolin", "violin"], 16],
+        ["violin 1", ["vln", "1.fiolin", "violin", "^vln|^violin|"], 16],
         ["violin 2", ["vln", "2.fiolin", "violin"], 16],
         ["viola", ["vla", "bratsj", "viola", "viole"], 14],
         ["cello", ["vcl", "cello", "celli", "violoncello"], 9],
+        ["bassoon", ["bassoon", "bn", "fagott"], 2],
         ["bass", ["vba", "bass", "contrabass", "kontrabass"], 6],
         ["oboe", ["obo", "oboe", "oboi"], 2],
         ["clarinet", ["cl", "klarinett", "clarinet"], 2],
         ["flute", ["fl", "fløyte", "flute"], 2],
-        ["bassoon", ["bassoon", "bn", "fagott"], 2],
         ["percussion", ["perc", "percussion", "slagverk"], 4],
         ["horns", ["horn", "hn"], 4]
     ]
