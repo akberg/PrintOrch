@@ -36,51 +36,47 @@ n = 0
 content = []
 # Number of copies for each pdf
 nums = []
-#main = Main()
-#main.run()
-#exit()
 
+import os
 while 1:
-    #Util.system('cls')
     alt = User.display(path, save_path, work, save_name, content, nums, n)
 
-    if alt == 0: # Avlsutt
+    if alt == 0: # Exit
         out_file.close()
         exit(0)
 
 
-    elif alt == 1: # Hent mappe
+    elif alt == 1: # Fetch folder
         try:
             path = diropenbox()
         except Exception as e:
-            ##print(e)
             input()
-        if path != "":
+        if path != "":  # Make sure a valid folder was chosen
+                        # Read and interpret available meta-info
             try: 
-                work = path.split("\\")[-1]
-                save_name = "_".join(work.split()) + "_printready"
-                content = Util.get_content(path)
+                work = os.path.basename(path)                       # Determine work name based on folder name
+                save_name = "_".join(work.split()) + "_printready"  # Generic name for save file
+                content = Util.get_content(path)                    # Get the folder's content
                 n = len(content)
-                nums = [1]*n
+                nums = [1]*n                                        # Initialize array for num copies
+                                                                    # TODO: Save numbers relatied to instruments in settings and reload as guess next time
             except Exception as e:
-                ##print(e)
                 input()
-            #for i in range(n):
-            #    nums[i] = Util.get_num(content[i], work)
 
 
-    elif alt == 2: # Lagringsmappe
+    elif alt == 2:  # Saving directory
         save_path = User.prompt_save_dir()
 
 
-    elif alt == 3:
+    elif alt == 3:  # Save file name
         save_name = User.prompt_save_name(save_name)
 
 
-    elif alt == 4: # Endre antall
+    elif alt == 4: # Change number of copies
+        # TODO: Enable better navigation for convenience
         print("Angi tomt felt for å ikke endre verdi.")
         for i in range(n):
-            nums[i] = User.prompt_num(Util.get_instrument(content[i], work), nums[i])
+            nums[i] = User.prompt_num(Util.get_instrument(content[i], work), nums[i])   # For each loaded file, prompt num copies
     
     
     elif alt == 5: # Fullføre
@@ -91,13 +87,12 @@ while 1:
             try:
                 files = Util.open_files(path, content)  # Opens files, do this as late as possible
                 Util.merge_files(out_file, files, nums, n)
-                out_file.write(save_path + "\\" + save_name + ".pdf")
+                out_file.write(os.path.join(save_path, save_name + ".pdf"))     # Write PDF file to chosen path with chosen name
                 User.msg_complete()
-
-                # Create new object for next merging operation
-                out_file = Util.PdfFileMerger(strict=False)
+                out_file = Util.PdfFileMerger(strict=False)                     # Create new object for next merging operation
             except Exception as err:
-                print("Feil i sluttkode:")
+                # TODO: Make better error handling
+                print("Feil i sluttkode:")  
                 print(err)
                 input()
 

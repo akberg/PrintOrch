@@ -5,6 +5,7 @@ Andreas Klavenes Berg
 '''
 # Imports
 from os import listdir, system
+import os
 from PyPDF2 import PdfFileReader, PdfFileMerger
 
 # TODO: Add json parser to allow a settings file
@@ -51,13 +52,6 @@ def include(filename):
     '''
     return True if [w not in filename.lower() for w in exclude_keywords] else False
 
-    '''return True if \
-        "score" not in filename.lower() and \
-        "partitur" not in filename.lower() and \
-        "merged" not in filename.lower() and \
-        "ikkebruk" not in filename.lower() and \
-        "printready" not in filename.lower() else False'''
-
 
 def open_files(path, content):
     '''
@@ -69,7 +63,7 @@ def open_files(path, content):
     '''
     files = []
     for f in content:
-        files.append(PdfFileReader(path + "\\" + f, strict=False))
+        files.append(PdfFileReader(os.path.join(path, f), strict=False))
     return files
 
 
@@ -106,4 +100,3 @@ def merge_files(out_file: PdfFileMerger, files, nums, n):
 
 def file_exists(path, name):
     return name + ".pdf" in listdir(path)
-
