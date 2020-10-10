@@ -7,13 +7,7 @@ Andreas Klavenes Berg
 # Imports
 from easygui import diropenbox
 import Util
-'''
-import tkinter as tk
 
-
-window = tk.Tk()
-window.title("PrintOrch")
-'''
 
 def max_(a, b):
     return a if a > b else b
@@ -26,7 +20,6 @@ def display(path, save_path, work, save_name, content, nums, n):
     if len(content) > 0:
         for c in content:
             length = max_(length, len(Util.get_instrument(c, work)) + 5)
-        #length = len(Util.get_instrument(content[0], work)) + 10
     if work != "":
         print("-"*40)
         print(work)
@@ -50,7 +43,6 @@ def display(path, save_path, work, save_name, content, nums, n):
     ]
     choices = [0, 1, 2, 3]
     if path != "":
-    #    choices.insert()
         choices.append(4)
         if save_path != "" and save_name != "":
             choices.append(5)
@@ -105,8 +97,11 @@ def prompt_continue(content, nums, n, save_path):
 
 
 def prompt_overwrite(path, name):
+    '''
+    Prompt overwrite if file already exists
+    '''
     while 1:
-        sv = input("Filen " + path + "\\" + name +
+        sv = input("Filen " + path + "/" + name +
                    ".pdf finnes allerede. Er du sikker på at du vil overskrive den? [ja=1/nei=0]: ")
         try:
             if int(sv) == 1:
