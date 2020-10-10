@@ -41,9 +41,9 @@ def display(path, save_path, work, save_name, content, nums, n):
     print()
 
     menu = [
-        "0) Avlutt",
+        "0) Avslutt",
         "1) Velg notemappe",
-        "2) Veldg målmappe",
+        "2) Velg målmappe",
         "3) Endre navn på målfil",
         "4) Endre antall kopier",
         "5) Fullfør",
