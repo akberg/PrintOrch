@@ -26,7 +26,7 @@ def meta(filename, composer, title):
     cl 3 (Bass)
     fl 1 + 2
     trb 3 & tuba
-
+    """
 
 class NameReader():
     """
