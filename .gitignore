@@ -5,3 +5,8 @@
 .vscode/
 __pycache__/
 .idea/
+
+
+# Added by cargo
+
+/target
