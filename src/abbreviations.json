@@ -1,0 +1,102 @@
+
+[
+    {
+        "abbr": "picc|fl picc",
+        "section": "woodwinds",
+        "en": "piccolo",
+        "no": "piccolofløyte"
+    },
+    {
+        "abbr": "afl|fl alto",
+        "section": "woodwinds",
+        "en": "alto flute",
+        "no": "altfløyte"
+    },
+    {
+        "abbr": "fl",
+        "section": "woodwinds",
+        "en": "flute",
+        "no": "fløyte"
+    },
+    {
+        "abbr": "cl",
+        "section": "woodwinds",
+        "en": "clarinet",
+        "no": "klarinett"
+    },
+    {
+        "abbr": "ob|obo",
+        "section": "woodwinds",
+        "en": "oboe",
+        "no": "obo"
+    },
+    {
+        "abbr": "bn|bsn",
+        "section": "woodwinds",
+        "en": "bassoon",
+        "no": "fagott"
+    },
+    {
+        "abbr": "asx|asax|altsax",
+        "en": "alto saxophone",
+        "no": "altsaksofon"
+    },
+    {
+        "abbr": "tsx|tsax|tensax",
+        "en": "tenor saxophone",
+        "no": "tenorsaksofon"
+    },
+
+    {
+        "abbr": "tpt",
+        "en": "trumpet",
+        "no": "trompet"
+    },
+    {
+        "abbr": "tbn",
+        "en": "trombone",
+        "no": "trombone"
+    },
+    {
+        "abbr": "hn",
+        "section": "brass",
+        "en": "horn",
+        "no": "horn"
+    },
+
+    {
+        "abbr": "vln",
+        "section": "strings",
+        "en": "violin",
+        "no": "fiolin"
+    },
+    {
+        "abbr": "vla",
+        "section": "strings",
+        "en": "viola",
+        "no": "bratsj"
+    },
+    {
+        "abbr": "vlc",
+        "section": "strings",
+        "en": "cello",
+        "no": "cello"
+    },
+    {
+        "abbr": "db|vba|vcb|cb",
+        "section": "strings",
+        "en": "double bass",
+        "no": "kontrabass"
+    },
+
+    {
+        "abbr": "perc",
+        "en": "percussion",
+        "no": "slagverk"
+    },
+    {
+        "abbr": "harp",
+        "en": "harp",
+        "no": "harpe"
+    }
+]
