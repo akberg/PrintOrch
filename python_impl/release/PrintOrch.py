@@ -10,15 +10,12 @@ Tasks:
 - Recognize instruments from file names, prompt if there are issues, then learn
 - Create a single output file containing correct number of copies from each sheet
 '''
-try:
-    # Imports
-    import User
-    import Util
-    from easygui import diropenbox
-    # from UserGUI import Main
-except:
-    print("Feil i imports")
-    input()
+
+# Imports
+import User
+import Util
+from easygui import diropenbox
+
 
 # Path to pdf files
 path = ""

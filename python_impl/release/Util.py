@@ -6,6 +6,7 @@ Andreas Klavenes Berg
 # Imports
 from os import listdir, system
 import os
+import json
 from PyPDF2 import PdfFileReader, PdfFileMerger
 
 # TODO: Add json parser to allow a settings file
@@ -50,7 +51,10 @@ def include(filename):
     :param filename: Filename
     :return: If the file should be included
     '''
-    return True if [w not in filename.lower() for w in exclude_keywords] else False
+    with open("settings.json", "r") as f:
+        exclude = json.load(f)["exclude-keywords"]
+        print("Loaded settings.json")
+    return all([w not in filename.lower() for w in exclude])
 
 
 def open_files(path, content):

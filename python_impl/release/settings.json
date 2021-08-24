@@ -1,0 +1,9 @@
+{
+    "exclude-keywords": [
+        "score",
+        "partitur",
+        "merged",
+        "ikkebruk",
+        "printready"
+    ]
+}

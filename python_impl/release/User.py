@@ -14,12 +14,12 @@ def max_(a, b):
 
 
 def display(path, save_path, work, save_name, content, nums, n):
-    print('\n'*20) # "clear screen"
+    print('='*20) # "clear screen"
     
     length = 0
     if len(content) > 0:
         for c in content:
-            length = max_(length, len(Util.get_instrument(c, work)) + 5)
+            length = max(length, len(Util.get_instrument(c, work)) + 5)
     if work != "":
         print("-"*40)
         print(work)

@@ -18,7 +18,7 @@ class Part():
         pass
 
 
-class ScoreMerger:
+class ScoreMerger():
 
 
     # Path to pdf files
