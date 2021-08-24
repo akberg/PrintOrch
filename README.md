@@ -1,5 +1,16 @@
 # PrintOrch
-TODO: Clean up this mess  
-TODO: Setup up venv  
-TODO: Setup run script for UNIX and Windows  
-Installasjonsguide: Last ned innholdet i mappen "release" og lagre der det passer. PrintOrch er laget i, og er kun kompatibelt med Windows. For Mac må riktig Python-versjon (python.org) med eksterne biblioteker installeres før Pythonprogrammet kan kjøres. Kjør program.bat, den gjør ingen endringer på maskinen, men kjører PrintOrch med Python-versjonen som fulgte med mappen. PrintOrch er basert på kommandolinjen, du får til enhver tid listet mulige handlinger med tallverdien du skal skrive inn for å kjøre.
+(work in progress)
+
+## Installasjonsguide
+Krever en installasjon av [python3](python.org).
+
+Last ned innholdet i mappen "python_impl/release" og lagre der det passer. 
+
+Installer eksterne moduler fra `requirements.txt`
+```
+$ python3 -m pip install -r requirements.txt
+$ # Kjør skriptet:
+$ cd python_impl/release
+$ python3 PrintOrch.py
+```
+PrintOrch er basert på kommandolinjen, du får til enhver tid listet mulige handlinger med tallverdien du skal skrive inn for å kjøre.
