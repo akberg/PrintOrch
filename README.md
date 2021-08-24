@@ -2,7 +2,7 @@
 (work in progress)
 
 ## Installasjonsguide
-Krever en installasjon av [python3](python.org).
+Krever en installasjon av [python3](python.org). Linuxbrukere kan trenge tkinter også: `apt install python3-tk`
 
 Last ned innholdet i mappen "python_impl/release" og lagre der det passer. 
 
